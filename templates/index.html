@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block body %}
+
+    <div class="container mb-3">
+        <div class="d-flex align-items-center">
+            <div>
+        <h2 style="color: #007BFF;">
+            Add a To-Do
+        </h2>
+        <form action="/" method="POST">
+            <div class="mb-3">
+                <label for="title" class="form-label">To-Do Title</label>
+                <input type="text" class="form-control" name="title" id="title" aria-describedby="emailHelp" style="width: 300px;">
+            </div>
+            <div class="mb-3">
+                <label for="desc" class="form-label">To-Do Description</label>
+                <input type="text" class="form-control" name="desc" id="desc">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <img src="https://cdn.dribbble.com/users/4497136/screenshots/16809563/media/731700ec22e669405752dba793ed187b.jpeg?resize=1000x750&vertical=center" 
+    alt="Image" style="width: 30%; height: 30%; margin-left: 500px;">
+        </div>
+    </div>
+
+    <div class="container my-3">
+        <h2 style="color: #28A745;">
+            Your Todos
+        </h2>
+        
+        {% if allTodo|length == 0 %}
+            <div class="alert alert-dark" role="alert">
+                No Todos found. Add a new one.
+            </div>
+        {% else %} 
+            <table class="table">
+                <thead style="background-color: #343A40; color: white;">
+                    <tr>
+                        <th scope="col">SNo</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    {% for piyushtodo in allTodo %}
+                        <tr>
+                            <th scope="row">{{loop.index}}</th>
+                            <td>{{piyushtodo.title}}</td>
+                            <td>{{piyushtodo.desc}}</td>
+                            <td>{{piyushtodo.date_created}}</td>
+                            <td>
+                                <a href="/update/{{piyushtodo.sno}}" type="button" class="btn btn-outline-dark btn-sm mx-1">Update</a>
+                                <a href="/delete/{{piyushtodo.sno}}" type="button" class="btn btn-outline-dark btn-sm mx-1">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+{% endblock body %}
