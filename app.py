@@ -58,4 +58,4 @@ def delete(sno):
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
-    app.run(debug=False,host='0.0.0.0')
+    app.run(debug=True,port=8000)
